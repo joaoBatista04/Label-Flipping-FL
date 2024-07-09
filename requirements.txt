@@ -1,0 +1,7 @@
+flwr
+tensorflow
+keras
+pandas
+numpy
+ray
+matplotlib

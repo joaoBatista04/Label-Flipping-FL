@@ -1,0 +1,48 @@
+---
+# General settings
+general:
+  n_available_cpu: 4
+  broker_image: mininetfed:broker
+  experiments_folder: experiments
+
+experiment:
+  new_experiment: True
+  experiment_name: mnist_without_flipping
+  trainer_mode: client
+  max_n_rounds: 50
+  stop_accuracy: 0.97
+  min_trainers: 4
+
+network:
+  network_monitor_script: network_monitor.py
+  network_monitor_image: mininetfed:client
+  network_components: 1
+
+  connections:
+    - connection1: 1
+      connection2: 2
+      loss: 0
+      delay: 0ms
+      bw: 10
+
+# Server settings
+server:
+  memory: 256m
+  vCPU_percent: 20
+  image: mininetfed:client
+  connection: 1
+  script: server/server.py
+
+# Clients settings list
+client_types:
+  - amount: 4
+    name: tipo1
+    memory: 480m
+    # memory: 2048m
+    vCPU_percent: 100
+    image: mininetfed:client
+    script: client/client.py
+    connection: 1
+    loss: 0
+    delay: 0ms
+    bw: 10
